@@ -7,7 +7,8 @@ export abstract class Base {
 
     @Column({
         name: 'created_at',
-        nullable: true
+        nullable: true,
+        default: () => "CURRENT_TIMESTAMP(6)"
     })
     createdAt: Date
 
@@ -41,6 +42,8 @@ export abstract class Base {
     })
     deletedBy: number
 
-    @Column()
+    @Column({
+        default: true
+    })
     active: boolean
 }

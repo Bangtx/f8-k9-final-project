@@ -34,3 +34,18 @@ create table if not exists vendor
 insert into vendor (name, location, email)
 values ('The gioi di dong', 'Ha Noi', 'tgdd@test.com'),
        ('Dien may xanh', 'Ha Noi', 'dmx@test.com');
+
+
+create table if not exists image (
+    id          bigserial,
+    path        text,
+    url         text,
+    created_at  timestamp with time zone NOT NULL DEFAULT now(),
+    created_by  bigint,
+    modified_at timestamp with time zone,
+    modified_by bigint,
+    deleted_at  timestamp with time zone,
+    deleted_by  bigint,
+    active      boolean DEFAULT TRUE,
+    constraint pkey_image primary key (id)
+)
