@@ -4,12 +4,14 @@ import {CreateDto} from "./dto";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {BaseService} from "../base/service";
+import {MailerService} from "@nestjs-modules/mailer";
 
 @Injectable()
 export class VendorService extends BaseService{
     constructor(
         @InjectRepository(Vendor)
-        private vendorRepository: Repository<Vendor>
+        private vendorRepository: Repository<Vendor>,
+        protected mailService: MailerService
     ) {
         super(vendorRepository)
     }
@@ -35,5 +37,17 @@ export class VendorService extends BaseService{
         vendorEntity.active = true
 
         return this.vendorRepository.save(vendorEntity)
+    }
+
+    create(data) {
+        this.mailService.sendMail({
+            from: 'bangtran.hha@gmail.com',
+            to: 'dokien3112003@gmail.com',
+            subject: 'Chao Kien',
+            text: 'Xin chao kien, em da tao vendor moi',
+            html: '<h1>da em chao anh kien</h1><p>em test thoi a</p>'
+        })
+
+        return super.create(data);
     }
 }

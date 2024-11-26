@@ -29,7 +29,6 @@ export class BaseService {
         return this.repository
             .createQueryBuilder()
             .insert()
-            .into(Vendor)
             .values(data).execute()
     }
 
