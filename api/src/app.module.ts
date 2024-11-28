@@ -4,9 +4,11 @@ import { AppService } from './app.service';
 import {VendorModule} from "./vendor/module";
 import {StoreModule} from "./store/module";
 import {ImageModule} from "./image/module";
+import {LocationModule} from "./localtion/module";
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Vendor } from './vendor/entity'
 import { Store } from './store/entity'
+import { Location } from './localtion/entity'
 import { Image } from './image/entity'
 
 @Module({
@@ -18,13 +20,14 @@ import { Image } from './image/entity'
       username: 'postgres',
       password: 'postgres',
       database: 'default',
-      entities: [Vendor, Store, Image],
+      entities: [Vendor, Store, Image, Location],
       synchronize: true,
       logging: true
     }),
     VendorModule,
     StoreModule,
-    ImageModule
+    ImageModule,
+    LocationModule
   ],
   controllers: [AppController],
   providers: [AppService],

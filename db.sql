@@ -48,4 +48,15 @@ create table if not exists image (
     deleted_by  bigint,
     active      boolean DEFAULT TRUE,
     constraint pkey_image primary key (id)
-)
+);
+
+
+drop table if exists location cascade;
+create table if not exists location (
+    latitude numeric(3, 10),
+    longitude numeric(3, 10),
+    driver_id bigint,
+    constraint pkey_location primary key (driver_id)
+);
+
+create index location_idx on location (latitude, longitude);
