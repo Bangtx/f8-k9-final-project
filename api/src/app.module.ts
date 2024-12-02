@@ -10,6 +10,8 @@ import { Vendor } from './vendor/entity'
 import { Store } from './store/entity'
 import { Location } from './localtion/entity'
 import { Image } from './image/entity'
+import {Material} from "./material/entity";
+import {MaterialModule} from "./material/module";
 
 @Module({
   imports: [
@@ -20,14 +22,15 @@ import { Image } from './image/entity'
       username: 'postgres',
       password: 'postgres',
       database: 'default',
-      entities: [Vendor, Store, Image, Location],
+      entities: [Vendor, Store, Image, Location,Material],
       synchronize: true,
       logging: true
     }),
     VendorModule,
     StoreModule,
     ImageModule,
-    LocationModule
+    LocationModule,
+    MaterialModule
   ],
   controllers: [AppController],
   providers: [AppService],

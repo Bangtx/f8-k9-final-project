@@ -60,3 +60,54 @@ create table if not exists location (
 );
 
 create index location_idx on location (latitude, longitude);
+
+create table if not exists material (
+    id          bigserial,
+    name        text,
+    unit_price  numeric(10, 2),
+    created_at  timestamp with time zone NOT NULL DEFAULT now(),
+    created_by  bigint,
+    modified_at timestamp with time zone,
+    modified_by bigint,
+    deleted_at  timestamp with time zone,
+    deleted_by  bigint,
+    active      boolean DEFAULT TRUE,
+    constraint pkey_material primary key (id)
+);
+
+
+create table if not exists "order"
+(
+    id             bigserial,
+    driver_id      bigint,
+    store_id       bigint,
+    image_id       bigint,
+    status         text, -- pending, processing, picked-up, on-moving, done
+    payment_status text, -- unpaid, paid
+    total_amount   numeric(10, 2),
+    created_at     timestamp with time zone NOT NULL DEFAULT now(),
+    created_by     bigint,
+    modified_at    timestamp with time zone,
+    modified_by    bigint,
+    deleted_at     timestamp with time zone,
+    deleted_by     bigint,
+    active         boolean                           DEFAULT TRUE,
+    constraint pkey_order primary key (id)
+);
+
+create table if not exists order_detail
+(
+    id             bigserial,
+    order_id       bigint,
+    material_id    bigint,
+    weight         numeric(10, 2),
+    amount         numeric(10, 2),
+    created_at     timestamp with time zone NOT NULL DEFAULT now(),
+    created_by     bigint,
+    modified_at    timestamp with time zone,
+    modified_by    bigint,
+    deleted_at     timestamp with time zone,
+    deleted_by     bigint,
+    active         boolean                           DEFAULT TRUE,
+    constraint pkey_order_detail primary key (id)
+)
