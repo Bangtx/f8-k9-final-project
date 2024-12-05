@@ -1,15 +1,19 @@
-import {Body, Get, Param, Post, Controller, Put, Delete, Inject} from '@nestjs/common';
+import {Body, Get, Param, Post, Controller, Put, Delete, Request} from '@nestjs/common';
 import {CreateDto, UpdateDto} from "./dto";
 import {VendorService} from './service'
+import { Reflector } from '@nestjs/core';
 
 
 @Controller('vendor')
 export class VendorController {
-    constructor(private vendorService: VendorService) {}
+    constructor(
+        private vendorService: VendorService,
+        private reflector: Reflector
+    ) {}
 
 
     @Get("/")
-    getAll() {
+    getAll(@Request() req) {
         return this.vendorService.getList();
     }
 

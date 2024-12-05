@@ -3,6 +3,22 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from "@nestjs/common";
 import {json} from "express";
+import {sign} from 'jsonwebtoken'
+
+
+
+const ACCESS_TOKEN_EXPIRE = 1
+const SECRET_KEY = '12bdi12ebd2d23rf2ef12'
+const ALGORITHM = 'HS256'
+
+const payload = {
+  name: 'test',
+  role: 'admin',
+  phone: '123'
+}
+
+const token = sign(payload, SECRET_KEY, { algorithm: 'RS256' }, () => {});
+console.log('token', token)
 
 
 async function bootstrap() {

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {VendorModule} from "./vendor/module";
@@ -15,6 +15,8 @@ import {MaterialModule} from "./material/module";
 import {OrderModule} from "./order/module";
 import {Order} from "./order/entity";
 import {OrderDetail} from "./orderDetail/entity";
+import {AuthModule} from "./auth/module";
+import {MyMiddleware} from './middleware'
 
 @Module({
   imports: [
@@ -34,9 +36,16 @@ import {OrderDetail} from "./orderDetail/entity";
     ImageModule,
     LocationModule,
     MaterialModule,
-    OrderModule
+    OrderModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+        .apply(MyMiddleware)
+        .forRoutes('vendor');
+  }
+}
