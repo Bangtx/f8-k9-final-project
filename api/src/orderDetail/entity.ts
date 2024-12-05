@@ -2,7 +2,7 @@ import {Base} from "../base/entity";
 import {Column, Entity} from "typeorm";
 
 @Entity()
-class OrderDetail extends Base {
+export class OrderDetail extends Base {
     @Column({
         name: 'order_id'
     })

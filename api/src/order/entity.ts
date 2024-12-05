@@ -2,7 +2,7 @@ import {Base} from "../base/entity";
 import {Column, Entity} from "typeorm";
 
 @Entity()
-class Order extends Base {
+export class Order extends Base {
     @Column({
         name: 'driver_id',
         nullable: true

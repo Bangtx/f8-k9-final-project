@@ -12,6 +12,9 @@ import { Location } from './localtion/entity'
 import { Image } from './image/entity'
 import {Material} from "./material/entity";
 import {MaterialModule} from "./material/module";
+import {OrderModule} from "./order/module";
+import {Order} from "./order/entity";
+import {OrderDetail} from "./orderDetail/entity";
 
 @Module({
   imports: [
@@ -22,7 +25,7 @@ import {MaterialModule} from "./material/module";
       username: 'postgres',
       password: 'postgres',
       database: 'default',
-      entities: [Vendor, Store, Image, Location,Material],
+      entities: [Vendor, Store, Image, Location, Material, Order, OrderDetail],
       synchronize: true,
       logging: true
     }),
@@ -30,7 +33,8 @@ import {MaterialModule} from "./material/module";
     StoreModule,
     ImageModule,
     LocationModule,
-    MaterialModule
+    MaterialModule,
+    OrderModule
   ],
   controllers: [AppController],
   providers: [AppService],
